@@ -86,6 +86,18 @@ def view_by_id(record_id):
     resp = dumps(profile)
     return resp
 
+# Method to Search Records based on Given Criteria
+@app.route('/search', methods=['POST'])
+def search():
+    received_json = request.json
+    pairs = received_json.items()
+    criteria = {}
+    for key, value in pairs:
+        criteria[key] = value
+    profile = mongo.db.profiles.find(criteria)
+    resp = dumps(profile)
+    return resp
+
 
 # Error Message Handling
 @app.errorhandler(404)

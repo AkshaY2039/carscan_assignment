@@ -48,6 +48,8 @@ number).
 
 *__Note:__ Install mentioned dependencies and the Launch the API Server, also Launch only one instance and make sure its running before testing using Postman or any other API client*
 
+*__Note:__ flask app runs on port 5000 by default but port can be set at `last line` in app.py as app.run(host=HOST, port=PORT)*
+
 ### Using Postman to Add New User Record
   ![AddProfile](PostmanTestingImages/AddProfile.png)  
   1. Select Request Method &rarr; `POST`
@@ -88,8 +90,6 @@ number).
   2. Type in URL &rarr; `http://localhost:5000/delete_profile/record_id` where `record_id` can be taken by viewing all user records
   3. `Send` Request
   4. Response will be shown here
-
-*__Note:__ flask app runs on port 5000 by default but port can be set at `last line` in app.py as app.run(host=HOST, port=PORT)*
 
 ## References
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/api/?highlight=flask%20flask#flask.Flask)
