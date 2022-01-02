@@ -21,7 +21,7 @@ def add_user_profile():
     mobile = received_json['mobile']
 
     if fname and lname and dob and city and mobile:
-        record_id = mongo.db.profiles.insert({
+        record_id = mongo.db.profiles.insert_one({
             'fname': fname,
             'lname': lname,
             'dob': dob,
@@ -29,7 +29,7 @@ def add_user_profile():
             'mobile': mobile
         })
 
-        resp = jsonify(f"User Profile Added Successfully with id : {record_id}")
+        resp = jsonify(f"User Profile Added Successfully")
         resp.status_code = 200
         return resp
     else:
@@ -39,13 +39,12 @@ def add_user_profile():
 @app.route('/view_profiles')
 def view_profiles():
     profiles = mongo.db.profiles.find()
-    resp = dumps (profiles)
+    resp = dumps(profiles)
     return resp
 
 
-@app.route('/update_profile/<id>', methods=['PUT'])
-def update_profile(id):
-    _id = id
+@app.route('/update_profile/<record_id>', methods=['PUT'])
+def update_profile(record_id):
     received_json = request.json
     fname = received_json['fname']
     lname = received_json['lname']
@@ -53,25 +52,34 @@ def update_profile(id):
     city = received_json['city']
     mobile = received_json['mobile']
     if fname and lname and dob and city and mobile:
-        mongo.db.profiles.update_one({'_id':ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)}, {'$set': {
-            'fname':fname,
-            'lname':lname,
-            'dob':dob,
-            'city':city,
-            'mobile':mobile
+        mongo.db.profiles.update_one(
+            {'_id': ObjectId(record_id['$oid']) if '$oid' in record_id else ObjectId(record_id)},
+            {'$set': {
+                'fname': fname,
+                'lname': lname,
+                'dob': dob,
+                'city': city,
+                'mobile': mobile
         }})
-        resp = jsonify ("User Updated Successfully")
+        resp = jsonify("User Updated Successfully")
         resp.status = 200
         return resp
-    else
+    else:
         return something_went_wrong()
 
 
-@app.route('/delete_profile/<id>', methods=['DELETE'])
-def delete_profile(id):
-    mongo.db.profiles.delete_one({'_id':ObjectId(id)})
-    resp = jsonify ("User Deleted Successfully")
+@app.route('/delete_profile/<record_id>', methods=['DELETE'])
+def delete_profile(record_id):
+    mongo.db.profiles.delete_one({'_id': ObjectId(record_id)})
+    resp = jsonify("User Deleted Successfully")
     resp.status = 200
+    return resp
+
+
+@app.route('/view_by_id/<record_id>')
+def view_by_id(record_id):
+    profile = mongo.db.profiles.find_one({'_id': ObjectId(record_id)})
+    resp = dumps(profile)
     return resp
 
 
