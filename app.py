@@ -67,11 +67,19 @@ def update_profile(id):
         return something_went_wrong()
 
 
+@app.route('/delete_profile/<id>', methods=['DELETE'])
+def delete_profile(id):
+    mongo.db.profiles.delete_one({'_id':ObjectId(id)})
+    resp = jsonify ("User Deleted Successfully")
+    resp.status = 200
+    return resp
+
+
 @app.errorhandler(404)
 def something_went_wrong(error=None):
     message = {
         'status': 404,
-        'message': 'Not Found @' + request.url
+        'message': 'Not Found @ ' + request.url
     }
     resp = jsonify(message)
     resp.status_code = 404
