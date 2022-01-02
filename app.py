@@ -4,7 +4,6 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.secret_key = "hello_carscan"
 app.config['MONGO_URI'] = "mongodb://localhost:27017/user_profiles"
 
 # instantiating Mongo DB Connection to our application
