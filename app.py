@@ -103,4 +103,4 @@ def something_went_wrong(error=None):
 if __name__ == "__main__":
     print("Welcome to the User Profiles API")
     # debug = True helps restart the server whenever a code change is saved
-    app.run(debug=True)
+    app.run()
