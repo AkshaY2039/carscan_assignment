@@ -11,6 +11,7 @@ app.config['MONGO_URI'] = "mongodb://localhost:27017/user_profiles"
 mongo = PyMongo(app)
 
 
+# Method to Add New Profile Record
 @app.route('/add_profile', methods=['POST'])
 def add_user_profile():
     received_json = request.json
@@ -36,6 +37,7 @@ def add_user_profile():
         return something_went_wrong()
 
 
+# Method to View All Profile Records Stored
 @app.route('/view_profiles')
 def view_profiles():
     profiles = mongo.db.profiles.find()
@@ -43,6 +45,7 @@ def view_profiles():
     return resp
 
 
+# Method to Update Single Profile Record
 @app.route('/update_profile/<record_id>', methods=['PUT'])
 def update_profile(record_id):
     received_json = request.json
@@ -68,6 +71,7 @@ def update_profile(record_id):
         return something_went_wrong()
 
 
+# Method to Delete Single Profile Record
 @app.route('/delete_profile/<record_id>', methods=['DELETE'])
 def delete_profile(record_id):
     mongo.db.profiles.delete_one({'_id': ObjectId(record_id)})
@@ -76,6 +80,7 @@ def delete_profile(record_id):
     return resp
 
 
+# Method to View Single Profile Record
 @app.route('/view_by_id/<record_id>')
 def view_by_id(record_id):
     profile = mongo.db.profiles.find_one({'_id': ObjectId(record_id)})
@@ -83,6 +88,7 @@ def view_by_id(record_id):
     return resp
 
 
+# Error Message Handling
 @app.errorhandler(404)
 def something_went_wrong(error=None):
     message = {
