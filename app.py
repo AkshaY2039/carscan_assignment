@@ -87,7 +87,7 @@ def view_by_id(record_id):
     return resp
 
 # Method to Search Records based on Given Criteria
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET'])
 def search():
     received_json = request.json
     pairs = received_json.items()

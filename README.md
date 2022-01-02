@@ -13,7 +13,7 @@ number).
 - Design Decision
     - Selection of MongoDB as there is not much relation between records to hold as per the requirements
     - Decided to use Flask over Django due to easier setup and familiar methods
-    - View All Users and View Single User functionality should be available in such application, hence added
+    - View All Users, View Single User and Search based on Criteria functionality added to make the api more useful
     - Relevant Request methods are only allowed for appropriate access to the API like:
       - POST for Creation of a Resource
       - GET for Retrieval of a Resource
@@ -24,11 +24,12 @@ number).
     - API tested using Postman API Testing Tool
 
 ## Dependencies
-- Language :   
+- Language :
   - >[python3 (Interpreter used - python3.9.6 +)](https://www.python.org/downloads/)
-- Python Packages :
+- Python Packages : _Some of these packages might be available by default with Python Installation or as a requirement of some other package. __Do install pip while installing python for managing and installing these packages easily___
   - >[flask (version 2.0.2 +)](https://pypi.org/project/Flask/) - `pip install flask`  
   - >[flask_pymongo (version 2.3.0 +)](https://pypi.org/project/Flask-PyMongo/) - `pip install Flask-PyMongo`  
+  - >[pymongo (version 4.0.1 +)](https://pypi.org/project/pymongo/) - `pip install pymongo`  
   - >[bson (version 0.5.10 +)](https://pypi.org/project/bson/) - `pip install bson`
 - Database :
   - >[MongoDB (version 5.0.5 +)](https://www.mongodb.com/try/download/community)
@@ -90,6 +91,17 @@ number).
   2. Type in URL &rarr; `http://localhost:5000/delete_profile/record_id` where `record_id` can be taken by viewing all user records
   3. `Send` Request
   4. Response will be shown here
+### Using Postman to Search based on Key and Value
+  ![Search](PostmanTestingImages/Search.png)  
+  1. Select Request Method &rarr; `GET`
+  2. Type in URL &rarr; `http://localhost:5000/search`
+  3. Select
+     1. `body` section
+     2. `raw` data type
+     3. `JSON` mimetype
+     4. Now type in the search key-value pairs in **JSON format** as shown in the image above
+  4. `Send` Request
+  5. Response will be shown here
 
 ## References
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/api/?highlight=flask%20flask#flask.Flask)
