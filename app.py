@@ -13,7 +13,7 @@ mongo = PyMongo(app)
 
 @app.route('/add_profile', methods=['POST'])
 def add_user_profile():
-    received_json = request.getjson()
+    received_json = request.json
     fname = received_json['fname']
     lname = received_json['lname']
     dob = received_json['dob']
@@ -22,11 +22,11 @@ def add_user_profile():
 
     if fname and lname and dob and city and mobile:
         record_id = mongo.db.profiles.insert({
-            'First Name': fname,
-            'Last Name': lname,
-            'Date Of Birth': dob,
-            'City': city,
-            'Mobile Number': mobile
+            'fname': fname,
+            'lname': lname,
+            'dob': dob,
+            'city': city,
+            'mobile': mobile
         })
 
         resp = jsonify(f"User Profile Added Successfully with id : {record_id}")
@@ -41,6 +41,30 @@ def view_profiles():
     profiles = mongo.db.profiles.find()
     resp = dumps (profiles)
     return resp
+
+
+@app.route('/update_profile/<id>', methods=['PUT'])
+def update_profile(id):
+    _id = id
+    received_json = request.json
+    fname = received_json['fname']
+    lname = received_json['lname']
+    dob = received_json['dob']
+    city = received_json['city']
+    mobile = received_json['mobile']
+    if fname and lname and dob and city and mobile:
+        mongo.db.profiles.update_one({'_id':ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)}, {'$set': {
+            'fname':fname,
+            'lname':lname,
+            'dob':dob,
+            'city':city,
+            'mobile':mobile
+        }})
+        resp = jsonify ("User Updated Successfully")
+        resp.status = 200
+        return resp
+    else
+        return something_went_wrong()
 
 
 @app.errorhandler(404)
