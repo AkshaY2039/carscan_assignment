@@ -14,9 +14,26 @@ number).
     - Selection of MongoDB as there is not much relation between records to hold as per the requirements
     - Decided to use Flask over Django due to easier setup and familiar methods
     - View All Users and View Single User functionality should be available in such application, hence added
+    - Relevant Request methods are only allowed for appropriate access to the API like:
+      - POST for Creation of a Resource
+      - GET for Retrieval of a Resource
+      - PUT for Update of a Resource
+      - DELETE for Deletion of a Resource
     - Connection to Local MongoDB is define in this API
 - Testing
-	- API tested using Postman API Testing Tool
+    - API tested using Postman API Testing Tool
+
+## Dependencies
+- Language :   
+  - >[python3 (Interpreter used - python3.9.6 +)](https://www.python.org/downloads/)
+- Python Packages :
+  - >[flask (version 2.0.2 +)](https://pypi.org/project/Flask/) - `pip install flask`  
+  - >[flask_pymongo (version 2.3.0 +)](https://pypi.org/project/Flask-PyMongo/) - `pip install Flask-PyMongo`  
+  - >[bson (version 0.5.10 +)](https://pypi.org/project/bson/) - `pip install bson`
+- Database :
+  - >[MongoDB (version 5.0.5 +)](https://www.mongodb.com/try/download/community)
+- Additional Softwares :
+  - >[Postman](https://www.postman.com/downloads/)
 
 ## How To Test the API
 ### Launch the API Server
@@ -73,18 +90,6 @@ number).
   4. Response will be shown here
 
 *__Note:__ flask app runs on port 5000 by default but port can be set at `last line` in app.py as app.run(host=HOST, port=PORT)*
-
-## Dependencies
-- Language :   
-  - >[python3 (Interpreter used - python3.9.6 +)](https://www.python.org/downloads/)
-- Python Packages :
-  - >[flask (version 2.0.2 +)](https://pypi.org/project/Flask/) - `pip install flask`  
-  - >[flask_pymongo (version 2.3.0 +)](https://pypi.org/project/Flask-PyMongo/) - `pip install Flask-PyMongo`  
-  - >[bson (version 0.5.10 +)](https://pypi.org/project/bson/) - `pip install bson`
-- Database :
-  - >[MongoDB (version 5.0.5 +)](https://www.mongodb.com/try/download/community)
-- Additional Softwares :
-  - >[Postman](https://www.postman.com/downloads/)
 
 ## References
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/api/?highlight=flask%20flask#flask.Flask)
